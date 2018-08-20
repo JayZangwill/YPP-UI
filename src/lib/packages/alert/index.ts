@@ -6,7 +6,7 @@ import alert from './index.vue'
 export default function install(Vue: VueConstructor) {
   let instance:any
 
-  Vue.extend({
+  Vue.mixin({
     methods: {
       $alert(opts: YPPAlertConfig, fn: any) {
         if (instance) {
