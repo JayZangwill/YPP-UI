@@ -21,24 +21,24 @@ import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 
 @Component
 export default class YPPAlert extends Vue {
-  isShow = false
-  title = ''
-  icon = ''
-  text = []
-  explain = []
-  btn = '确定'
-  hasClose = false
+  isShow: boolean = false
+  title: string = ''
+  icon: string = ''
+  text: object = []
+  explain: object = []
+  btn: string = '确定'
+  hasClose: boolean = false
 
-  open() {
+  open(): void {
     this.isShow = true;
   }
 
-  close() {
+  close(): void {
     this.isShow = false;
   }
 
   @Emit('submit')
-  submit() {
+  submit(): void {
     const self = this;
     self.close();
   }

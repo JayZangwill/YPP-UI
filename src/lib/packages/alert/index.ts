@@ -1,16 +1,13 @@
 import { VueConstructor } from 'vue';
 import alert from './index.vue';
+import { YPPAlertConfig } from '../../typings/alert';
 
-interface options extends Object{
-  [key: string]: any
-}
-
-export default function install(Vue: VueConstructor, options: object) {
+export default function install(Vue: VueConstructor) {
   let instance:any;
 
   Vue.mixin({
     methods: {
-      $alert(opts: options, fn: any) {
+      $alert(opts: YPPAlertConfig, fn: any) {
         if (instance) {
           instance.$el.remove();
         }
