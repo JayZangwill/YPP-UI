@@ -5,7 +5,7 @@ import { YPPAlertConfig } from '../../typings/alert';
 export default function install(Vue: VueConstructor) {
   let instance:any;
 
-  Vue.mixin({
+  Vue.extend({
     methods: {
       $alert(opts: YPPAlertConfig, fn: any) {
         if (instance) {
