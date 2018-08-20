@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
+import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
 
 @Component
 export default class YPPAlert extends Vue {
@@ -30,17 +30,17 @@ export default class YPPAlert extends Vue {
   hasClose: boolean = false
 
   open(): void {
-    this.isShow = true;
+    this.isShow = true
   }
 
   close(): void {
-    this.isShow = false;
+    this.isShow = false
   }
 
   @Emit('submit')
   submit(): void {
-    const self = this;
-    self.close();
+    const self = this
+    self.close()
   }
 }
 

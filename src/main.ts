@@ -1,14 +1,14 @@
-import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
 
-import YPP from './lib/index';
+import YPP from './lib/index'
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
 
-Vue.use(YPP);
+Vue.use(YPP)
 
 new Vue({
   router,
   render: h => h(App),
-}).$mount('#app');
+}).$mount('#app')
