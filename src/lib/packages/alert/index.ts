@@ -6,30 +6,38 @@ interface options extends Object{
 }
 
 export default function install(Vue: VueConstructor, options: object) {
-  let instance:any
-  Vue.prototype.$alert = (opts: options, fn: any) => {
-    if (instance) {
-      instance.$el.remove()
-    }
+  let instance:any;
 
-    const YPPAlert = Vue.extend(alert)
+  Vue.mixin({
+    methods: {
+      $alert(opts: options, fn: any) {
+        if (instance) {
+          instance.$el.remove();
+        }
 
-    instance = new YPPAlert({
-      el: document.createElement('div')
-    })
+        const YPPAlert = Vue.extend(alert);
 
+        instance = new YPPAlert({
+          el: document.createElement('div'),
+        });
 
-    try {
-      opts = Object.assign({}, opts, options)
-    } catch (e) {
-    }
-    for (const key in opts) {
-      instance[key] = opts[key]
-    }
+        if (opts) {
+          instance = {
+            ...instance,
+            ...opts,
+          };
+        }
 
-    typeof fn === 'function' && instance.$on('submit', fn)
-    document.body.appendChild(instance.$el)
-    instance.open()
-    return instance
-  }
+        if (fn && typeof fn === 'function') {
+          instance.$on('submit', fn);
+        }
+
+        document.body.appendChild(instance.$el);
+        instance.open();
+        return instance;
+      },
+
+    },
+
+  });
 }
