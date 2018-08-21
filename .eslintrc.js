@@ -28,7 +28,7 @@ module.exports = {
     'generator-star-spacing': 0,
   },
   "globals": {
-    "ypp": true,
+    "ypp": true
   },
   parserOptions: {
     parser: 'typescript-eslint-parser',
