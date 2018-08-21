@@ -12,6 +12,7 @@ export default class YPPToast extends Vue {
   isShow: boolean = false
   text: string = ''
   timer: any = null
+
   open (text: string): void {
     this.text = text
     this.isShow = true
@@ -19,7 +20,8 @@ export default class YPPToast extends Vue {
       this.close()
       clearTimeout(this.timer)
     }, 2000)
-  },
+  }
+
   close (): void {
     this.isShow = false
   }
