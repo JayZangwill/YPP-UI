@@ -14,6 +14,17 @@ const component = [
   Process
 ]
 
-export default function install(Vue: VueConstructor, options: object) {
+
+const install = function (Vue: VueConstructor) {
+  // if (install.installed) return
   component.forEach(component => Vue.use(component))
+}
+
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue)
+}
+
+export default {
+  install,
+  ...component
 }
