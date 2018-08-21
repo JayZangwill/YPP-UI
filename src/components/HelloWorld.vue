@@ -6,6 +6,10 @@
       check out the
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
     </p>
+
+    <div @click="testloader">
+      testloader
+    </div>
   </div>
 </template>
 
@@ -15,6 +19,10 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class HelloWorld extends Vue {
   @Prop() private msg!: string;
+
+  testloader() {
+    console.log(this.$loader.open())
+  }
 }
 </script>
 
