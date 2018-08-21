@@ -1,6 +1,7 @@
 import { VueConstructor } from 'vue'
 
 import Alert from '@/lib/packages/alert/index.ts'
+import Toast from '@/lib/packages/toast/index.ts'
 import Captcha from '@/lib/packages/captcha/index.ts'
 import Confirm from '@/lib/packages/confirm/index.ts'
 import Loader from '@/lib/packages/loader/index.ts'
@@ -11,7 +12,8 @@ const component = [
   Captcha,
   Confirm,
   Loader,
-  Process
+  Process,
+  Toast
 ]
 
 const install = function (Vue: VueConstructor) {
