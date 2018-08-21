@@ -33,3 +33,5 @@ export default function install (Vue: VueConstructor) {
     target: document.body
   })
 }
+
+export { LoaderConstructor }
