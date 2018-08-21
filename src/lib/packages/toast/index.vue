@@ -19,7 +19,7 @@ export default class YPPToast extends Vue {
       this.close()
       clearTimeout(this.timer)
     }, 2000)
-  },
+  }
   close (): void {
     this.isShow = false
   }
