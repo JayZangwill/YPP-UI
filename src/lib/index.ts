@@ -14,7 +14,6 @@ const component = [
   Process
 ]
 
-
 const install = function (Vue: VueConstructor) {
   // if (install.installed) return
   component.forEach(component => Vue.use(component))

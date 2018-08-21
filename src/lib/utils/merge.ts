@@ -1,4 +1,5 @@
-export default function(target) {
+export default function() {
+  const target = arguments[0]
   for (let i = 1, j = arguments.length; i < j; i++) {
     let source = arguments[i] || {}
     for (let prop in source) {
