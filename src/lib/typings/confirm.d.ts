@@ -1,8 +1,8 @@
 import { PluginObject } from 'vue'
 
-export interface YPPAlertConfig extends Object {
+export interface YPPConfirmConfig extends Object{
   isShow: boolean
-  
+
   title: string
 
   icon: string
@@ -13,7 +13,9 @@ export interface YPPAlertConfig extends Object {
 
   btn: string
 
+  btnCancel: string
+
   hasClose: boolean
 }
 
-export interface YPPAlert extends PluginObject<YPPAlertConfig> {}
+export interface YPPConfirm extends PluginObject<YPPConfirmConfig> {}
