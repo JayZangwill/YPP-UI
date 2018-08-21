@@ -11,8 +11,14 @@ import { Component, Vue } from 'vue-property-decorator'
 export default class YPPToast extends Vue {
   isShow: boolean = false
   text: string = ''
-  open (): void {
+  timer: any = null
+  open (text: string): void {
+    this.text = text
     this.isShow = true
+    this.timer = setTimeout(() => {
+      this.close()
+      clearTimeout(this.timer)
+    }, 2000)
   },
   close (): void {
     this.isShow = false
@@ -35,9 +41,14 @@ export default class YPPToast extends Vue {
   background: rgba(0, 0, 0, .7);
   color: #fff;
   display: inline-block;
-  padding: 0 .1rem;
+  /* padding: 0 .1rem;
   border-radius: .05rem;
   height: .4rem;
-  line-height: .4rem;
+  line-height: .4rem; */
+  border-radius: 4px;
+  height: 16px;
+  line-height: 16px;
+  padding: 2px 6px;
+  font-size: 12px;
 }
 </style>

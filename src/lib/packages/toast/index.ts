@@ -1,49 +1,32 @@
 import toast from './index.vue'
 import Vue, { VueConstructor } from 'vue'
+import { ToastServerOptions } from '@/lib/typings/toast'
 
-// class Toast extends Vue {
-//   text: string
-//   constructor (text: string) {
-//     super()
-//     this.text = text || ''
-//   }
-  // static open(text: string) {
-  //   this.text = text || ''
-  //   this.close()
-  // }
-  // $toast () {
-  //   return {
-  //     open (text: string): void {
-  //       this.text = text || ''
-  //     },
-  //     close (): void {}
-  //   }
-  // }
-// }
 const Toast = Vue.extend(toast)
-let timer: any = null
-Toast.prototype.$toast = {
-  open (text: string): void {
-    this.text = text || ''
-    this.open()
-    timer = setTimeout(() => {
-      this.close()
-      clearTimeout(timer)
-    }, 2000)
-  },
-  close (): void {
-    this.close()
-  }
+
+Toast.prototype.open = function (text: string): void {
+  this.text = text || ''
+  this.open()
+}
+Toast.prototype.close = function close(): void {
+  this.close()
+}
+
+const ToastServer = (options: ToastServerOptions) => {
+  if (Vue.prototype.$isServer) return
+
+  const parent: HTMLElement = options.target
+  const instance = new Toast({
+    el: document.createElement('div')
+  })
+
+  parent.appendChild(instance.$el)
+
+  return instance
 }
 
 export default (Vue: VueConstructor) => {
-  console.log(123)
-  // $toast: new Toast({
-  //   el: document.createElement('div')
-  // })
-  Vue.mixin({
-    methods: {
-      xxx () {}
-    }    
+  Vue.prototype.$toast = ToastServer({
+    target: document.body
   })
 }

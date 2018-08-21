@@ -3,6 +3,7 @@
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
     <div @click="test">aaaaaa</div>
+    <div @click="close">bbbb</div>
   </div>
 </template>
 
@@ -19,7 +20,10 @@ export default class Home extends Vue {
   test() {
     // this.$alert()
     // this.$loader
-    console.log(this.$loader, '***********')
+    this.$toast.open('啊大大的')
+  }
+  close () {
+    this.$toast.close()
   }
 }
 </script>
