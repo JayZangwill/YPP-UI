@@ -12,9 +12,9 @@ import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
 
 @Component({
   components: {
-  HelloWorld,
+    HelloWorld,
   },
-  })
+})
 export default class Home extends Vue {
   test() {
     this.$alert()
