@@ -21,17 +21,17 @@ const tranformMap = components.reduce((initial: any, v: reduceInitObject<string,
 
 // why no dynamic export ... ugly
 
-export const Alert: any = tranformMap.Alert
+export const Alert: Function = tranformMap.Alert
 
-export const Captcha: any = tranformMap.Captcha
+export const Captcha: Function = tranformMap.Captcha
 
-export const Confirm: any = tranformMap.Confirm
+export const Confirm: Function = tranformMap.Confirm
 
-export const Loader: any = tranformMap.Loader
+export const Loader: Function = tranformMap.Loader
 
-export const Process: any = tranformMap.Process
+export const Process: Function = tranformMap.Process
 
-export const Toast: any = tranformMap.Toast
+export const Toast: Function = tranformMap.Toast
 
 export default {
   install,
