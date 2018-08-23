@@ -5,14 +5,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from "vue-property-decorator"
 
 @Component
 export default class YPPToast extends Vue {
-  isShow: boolean = false
-  text: string = ''
-  timer: any = null
-  open (text: string): void {
+  isShow: boolean = false;
+  text: string = "";
+  timer: any = null;
+
+  open(text: string): void {
     this.text = text
     this.isShow = true
     this.timer = setTimeout(() => {
@@ -20,7 +21,7 @@ export default class YPPToast extends Vue {
       clearTimeout(this.timer)
     }, 2000)
   }
-  close (): void {
+  close(): void {
     this.isShow = false
   }
 }
@@ -38,7 +39,7 @@ export default class YPPToast extends Vue {
   text-align: center;
 }
 .toast-blk span {
-  background: rgba(0, 0, 0, .7);
+  background: rgba(0, 0, 0, 0.7);
   color: #fff;
   display: inline-block;
   /* padding: 0 .1rem;
