@@ -1,31 +1,39 @@
 import { VueConstructor } from 'vue'
 
-import Alert from '@/lib/packages/alert/index.ts'
-import Toast from '@/lib/packages/toast/index.ts'
-import Captcha from '@/lib/packages/captcha/index.ts'
-import Confirm from '@/lib/packages/confirm/index.ts'
-import Loader from '@/lib/packages/loader/index.ts'
-import Process from '@/lib/packages/process/index.ts'
+import components from '@/lib/injection'
 
-const component = [
-  Alert,
-  Captcha,
-  Confirm,
-  Loader,
-  Process,
-  Toast
-]
+import { reduceInitObject } from './typings/index.d'
 
 const install = function (Vue: VueConstructor) {
   // if (install.installed) return
-  component.forEach(component => Vue.use(component))
+  components.forEach((component: any) => Vue.use(component.component))
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)
 }
 
+const tranformMap = components.reduce((initial: any, v: reduceInitObject<string, any>) => {
+  initial[v.name] = v.component
+  return initial
+}, {})
+
+
+// why no dynamic export ... ugly
+
+export const Alert: Function = tranformMap.Alert
+
+export const Captcha: Function = tranformMap.Captcha
+
+export const Confirm: Function = tranformMap.Confirm
+
+export const Loader: Function = tranformMap.Loader
+
+export const Process: Function = tranformMap.Process
+
+export const Toast: Function = tranformMap.Toast
+
 export default {
   install,
-  ...component
+  ...components.map((v: any) => v.component)
 }
