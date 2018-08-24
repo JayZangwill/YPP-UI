@@ -7277,3 +7277,7 @@ yorkie@^2.0.0:
     is-ci "^1.0.10"
     normalize-path "^1.0.0"
     strip-indent "^2.0.0"
+
+ypp-ui@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/ypp-ui/-/ypp-ui-0.0.7.tgz#554237cd386501074bb469efd0efe0f21863ff91"
