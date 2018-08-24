@@ -1,8 +1,15 @@
+const path = require('path')
+
 module.exports = {
   configureWebpack: {
     output: {
-      libraryExport: 'default'
+      library: 'ypp-ui',
+      libraryExport: 'default',
     }
   },
-  css: { extract: false }
+
+  outputDir: path.resolve(__dirname, `dist`),
+  css: { extract: false },
+  productionSourceMap: false,
+  filenameHashing: false
 }
