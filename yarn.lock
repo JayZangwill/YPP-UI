@@ -7278,6 +7278,11 @@ yorkie@^2.0.0:
     normalize-path "^1.0.0"
     strip-indent "^2.0.0"
 
-ypp-ui@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/ypp-ui/-/ypp-ui-0.0.7.tgz#554237cd386501074bb469efd0efe0f21863ff91"
+ypp-ui@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/ypp-ui/-/ypp-ui-0.1.5.tgz#de556b735b3f2d6e5f98f70f666e0762d81f5ad8"
+  dependencies:
+    vue "^2.5.17"
+    vue-class-component "^6.0.0"
+    vue-property-decorator "^7.0.0"
+    vue-router "^3.0.1"

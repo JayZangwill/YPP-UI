@@ -7,7 +7,13 @@ const limit_data: LimitData = {}
 const TIMEOUT_MSG = '网络超时'
 
 class Fetch {
-  public static defaultInterCeptor: defaultInterCeptor
+  public static addBeforeFetch: Function = (filter: any) => {
+    Interceptor.addBefores(filter)
+  }
+
+  public static addAfterFetch: Function = (reslove: Function, reject: Function) => {
+    Interceptor.addAfters(reslove, reject)
+  }
 
   public url: string
 
@@ -57,14 +63,19 @@ class Fetch {
       this.request()
     ])
       .then(() => {
+        this.clearLimit()
+
 
       })
       .catch(() => {
+        this.clearLimit()
 
       })
   }
 
   request(): Promise<any> {
+    this.opts = Interceptor.before(this.opts)
+    debugger
 
     return fetch(this.url, this.opts)
   }

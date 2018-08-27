@@ -7,11 +7,11 @@ class Interceptors {
     this.afters = new Set()
   }
 
-  addBefores(reslove: Function, reject: Function) {
+  addAfters(reslove: Function, reject: Function) {
     this.befores.add([reslove, reject])
   }
 
-  addAfters(filter: any) {
+  addBefores(filter: Function) {
     this.afters.add(filter)
   }
 
