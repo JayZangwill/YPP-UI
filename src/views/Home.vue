@@ -18,7 +18,12 @@ import HelloWorld from "@/components/HelloWorld.vue" // @ is an alias to /src
 })
 export default class Home extends Vue {
   test() {
-    this.$fetch("/Addresses/SelectAreas").then((res: any) => {
+    this.$fetch(
+      "https://nbrecsys.4paradigm.com/action/api/url?timestamp=1535350950070",
+      {
+        method: "POST"
+      }
+    ).then((res: any) => {
       console.log(res)
     })
   }

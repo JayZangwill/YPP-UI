@@ -58,6 +58,7 @@ class Fetch {
       this.timeoutPromise(),
       this.request()
     ])
+      .then(res => res.json())
 
     return Interceptor.after(result)
       .then(response => {
@@ -69,9 +70,11 @@ class Fetch {
         this.clearLimit()
 
         try {
-          return Interceptor.fail(e)
+          return Interceptor.fail(Promise.reject(e))
         } catch (error) {
-          Promise.reject(error)
+          return {
+            ...error
+          }
         }
       })
   }

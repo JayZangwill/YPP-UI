@@ -7,6 +7,7 @@ const commons = [
 
 window.Fetch = Fetch
 
+
 const install = function (vue: VueConstructor) {
   commons.forEach(v => vue.prototype[v.name] = v)
 }
