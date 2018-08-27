@@ -32,14 +32,31 @@ class Fetch {
 
     this.init()
 
+    this.setUrl()
+
     return this.fetch()
   }
 
   init() {
+    this.opts = {
+      method: 'get',
+      ...this.opts
+    }
+
     this.other = {
       limittime: 1000,
       timeout: 10,
       ...this.other
+    }
+  }
+
+  setUrl() {
+    if (this.opts.method.toUpperCase() === 'GET' && this.opts.data) {
+      const query = Object.keys(this.opts.data).map(k => `${k}=${encodeURIComponent(data[k])}`).join('&')
+
+      if (query) {
+        this.url = `${this.url}?${query}`
+      }
     }
   }
 
