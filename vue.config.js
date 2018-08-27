@@ -10,5 +10,14 @@ module.exports = {
   outputDir: path.resolve(__dirname, `dist`),
   css: { extract: false },
   productionSourceMap: false,
-  filenameHashing: false
+  filenameHashing: false,
+
+  devServer: {
+    proxy: {
+      '/Addresses': {
+        target: 'https://api.tuhu.cn',
+        changeOrigin: true
+      }
+    }
+  }
 }

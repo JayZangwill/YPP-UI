@@ -1,30 +1,24 @@
-import { LimitData, Other, defaultInterCeptor } from './fetch.d'
-
 import Interceptor from './interceptors'
 
-const limit_data: LimitData = {}
+const limit_data = {}
 
 const TIMEOUT_MSG = '网络超时'
 
 class Fetch {
-  public static addBeforeFetch: Function = (filter: any) => {
+
+  static addBeforeFetch = (filter) => {
     Interceptor.addBefores(filter)
   }
 
-  public static addAfterFetch: Function = (reslove: Function, reject: Function) => {
-    Interceptor.addAfters(reslove, reject)
+  static addAfterFetch = (reslove) => {
+    Interceptor.addAfters(reslove)
   }
 
-  public url: string
+  static addFailFetch = (reject) => {
+    Interceptor.addFails(reject)
+  }
 
-  public opts: RequestInit
-
-  public other: Other
-
-  public key: string
-
-  constructor(url: string, opts = {}, other: Other) {
-
+  constructor(url, opts = {}, other) {
     this.url = url
 
     this.opts = opts
@@ -37,9 +31,11 @@ class Fetch {
     })
 
     this.init()
+
+    return this.fetch()
   }
 
-  init(): void {
+  init() {
     this.other = {
       limittime: 1000,
       timeout: 10,
@@ -47,7 +43,7 @@ class Fetch {
     }
   }
 
-  fetch(): Promise<any> {
+  fetch() {
     // limit some request
     if (limit_data[this.key]) {
       return limit_data[this.key]
@@ -58,30 +54,36 @@ class Fetch {
       gReject
     } = this.limit()
 
-    return Promise.race([
+    const result = Promise.race([
       this.timeoutPromise(),
       this.request()
     ])
-      .then(() => {
+
+    return Interceptor.after(result)
+      .then(response => {
         this.clearLimit()
 
-
+        return response
       })
-      .catch(() => {
+      .catch(e => {
         this.clearLimit()
 
+        try {
+          return Interceptor.fail(e)
+        } catch (error) {
+          Promise.reject(error)
+        }
       })
   }
 
-  request(): Promise<any> {
+  request() {
     this.opts = Interceptor.before(this.opts)
-    debugger
 
     return fetch(this.url, this.opts)
   }
 
-  timeoutPromise(): Promise<any> {
-    return new Promise((resolve: Function, reject: Function) => {
+  timeoutPromise() {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
         reject(
           new Error(TIMEOUT_MSG)
@@ -90,11 +92,11 @@ class Fetch {
     })
   }
 
-  limit(): any {
+  limit() {
     let gResolve = null
     let gReject = null
 
-    limit_data[this.key] = new Promise((resolve: Function, reject: Function) => {
+    limit_data[this.key] = new Promise((resolve, reject) => {
       gResolve = resolve
       gReject = reject
     })
@@ -105,11 +107,15 @@ class Fetch {
     }
   }
 
-  clearLimit(): void {
+  clearLimit() {
     setTimeout(() => {
       delete limit_data[this.key]
     }, this.other.limittime)
   }
 }
 
-export default Fetch
+export default async function $fetch(url, opts = {}, other) {
+  return new Fetch(url, opts, other)
+}
+
+export { Fetch }

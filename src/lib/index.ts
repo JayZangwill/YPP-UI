@@ -1,8 +1,12 @@
-import { VueConstructor } from 'vue'
+import Vue, { VueConstructor } from 'vue'
+
+import commons from './commons'
 
 import components from '@/lib/injection'
 
 import * as SFCComponent from './injection'
+
+Vue.use(commons)
 
 const install = function (Vue: VueConstructor) {
   // if (install.installed) return

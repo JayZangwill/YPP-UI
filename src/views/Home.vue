@@ -8,21 +8,21 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
+import { Component, Vue } from "vue-property-decorator"
+import HelloWorld from "@/components/HelloWorld.vue" // @ is an alias to /src
 
 @Component({
   components: {
-    HelloWorld,
-  },
+    HelloWorld
+  }
 })
 export default class Home extends Vue {
   test() {
-    // this.$alert()
-    // this.$loader
-    this.$toast.open('啊大大的')
+    this.$fetch("/Addresses/SelectAreas").then((res: any) => {
+      console.log(res)
+    })
   }
-  close () {
+  close() {
     this.$toast.close()
   }
 }

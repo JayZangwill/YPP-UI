@@ -1,18 +1,24 @@
 class Interceptors {
   public befores: Set<any>
   public afters: Set<any>
+  public fails: Set<any>
 
   constructor() {
     this.befores = new Set()
     this.afters = new Set()
+    this.fails = new Set()
   }
 
-  addAfters(reslove: Function, reject: Function) {
-    this.befores.add([reslove, reject])
+  addAfters(reslove: Function) {
+    this.afters.add(reslove)
   }
 
   addBefores(filter: Function) {
-    this.afters.add(filter)
+    this.befores.add(filter)
+  }
+
+  addFails(filter: Function) {
+    this.fails.add(filter)
   }
 
   before(opts: RequestInit) {
@@ -20,9 +26,12 @@ class Interceptors {
   }
 
   async after(response: Promise<any>) {
-    return Array.from(this.afters).reduce((response, fnArr) => response.then.apply(response, fnArr), response)
+    return Array.from(this.afters).reduce((response, fn) => response.then.call(response, fn), response)
   }
 
+  async fail(rejection: Promise<any>) {
+    return Array.from(this.fails).reduce((rejection, fn) => rejection.catch.call(rejection, fn), rejection)
+  }
 }
 
 export default new Interceptors()

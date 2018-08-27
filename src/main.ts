@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
-const YPP = require('ypp-ui')
+const YPP = require('./lib/index')
 
 Vue.config.productionTip = false
 
