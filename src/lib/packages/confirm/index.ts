@@ -7,7 +7,7 @@ export default function install(Vue: VueConstructor) {
 
   Vue.mixin({
     methods: {
-      $alert(opts: YPPConfirmConfig, fn: Function, fn2: Function) {
+      $confirm(opts: YPPConfirmConfig, fn: Function, fn2: Function) {
         if (instance) {
           instance.$el.remove()
         }
